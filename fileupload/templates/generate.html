@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generate Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+
+    .title-label {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+    }
+
+    .image {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .text {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    .submit-button {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    .text-box {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <a href="main.html" class="title-link">
+    <h1 class="title-label">Design Your Logo</h1>
+  </a>
+  <img src="logo_letter_imag" alt="Logo Letter Image" class="image">
+  <p class="text">The letter above will be placed in your logo image.</p>
+  <p class="text">Please enter the prompt for generating the logo image.</p>
+
+  <form method="POST" action="{% url 'fileupload' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div>
+          <label for= "imgfile">{{img}}</label>
+          <input type="file">
+          <label for="content">prompt: </label>
+          <input type="text" class="text-box"  placeholder="Enter prompt here" name="content" required id ='content'>
+      </div>
+
+      <input type="submit" class="submit-button" value="Start Design">
+  </form>
+
+<!--  <a href="loading.html">-->
+<!--    <button class="submit-button">Start Design</button>-->
+<!--  </a>-->
+
+</body>
+</html>

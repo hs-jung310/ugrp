@@ -1,0 +1,109 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+      margin-top: 100px;
+    }
+
+    .title-label {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+    }
+
+    .upload-label {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    .image-container {
+      margin-top: 20px;
+    }
+
+    #uploaded-image {
+      max-width: 100%;
+    }
+
+    .next-button {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .next-button:hover {
+      background-color: #2976be;
+    }
+    .text-box {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="main.html" class="title-link">
+    <h1 class="title-label">Design Your Logo</h1>
+  </a>
+  <p class="upload-label">Upload your image file:</p>
+
+  <form method="POST" action="{% url 'fileupload' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+<!--      <div>-->
+<!--          <label for="title">title: </label>-->
+<!--          <input type="text" name="title" required id ='title'>-->
+<!--      </div>-->
+      <div>
+          <label for="imgfile"></label>
+          <input type="file" name="imgfile" required id="imgfile" accept="image/*">
+      </div>
+      <div>
+          <label for="content">prompt: </label>
+          <input type="text" class="text-box" name="content" required id ='content'>
+      </div>
+      <div class="image-container">
+        <img id="uploaded-image" src="imgfile" alt="Uploaded Image">
+      </div>
+      <a href="loading">
+         <input type="submit" class="next-button" value="Start design">
+      </a>
+  </form>
+<!--        <a href="generate'"> <button class="next-button">Next Step</button></a>-->
+<!--  <a href="generate.html">-->
+<!--    <button class="next-button">Next Step</button>-->
+<!--  </a>-->
+
+  <script>
+    // Get references to the file input and image element
+    const imageUpload = document.getElementById('image-upload');
+    const uploadedImage = document.getElementById('uploaded-image');
+
+    // Add an event listener to detect when a file is selected
+    imageUpload.addEventListener('change', (event) => {
+      const selectedFile = event.target.files[0];
+
+      if (selectedFile) {
+        // Create a URL for the selected image file and set it as the source of the image element
+        const imageUrl = URL.createObjectURL(selectedFile);
+        uploadedImage.src = imageUrl;
+      }
+    });
+  </script>
+</body>
+</html>
